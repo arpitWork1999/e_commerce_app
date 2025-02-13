@@ -1,5 +1,10 @@
 import 'package:get/get.dart';
 
-class HomeScreenController extends GetxController{
+class HomeScreenController extends GetxController {
+  var tabIndex = 0.obs;
+
+  void changeTabIndex(int index){
+    tabIndex.value = index;
+  }
 
 }
