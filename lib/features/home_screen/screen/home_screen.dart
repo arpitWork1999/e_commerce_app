@@ -30,77 +30,32 @@ class HomeScreen extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: navController.tabIndex.value == 0
-                  ? Icon(Symbols.home,
-                      fill: 1,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.red)
-                  : Icon(Symbols.home,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.grey),
+                  ? customRedIcon(iconName: Symbols.home)
+                  : customGreyIcon(iconName: Symbols.home),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: navController.tabIndex.value == 1
-                  ? Icon(Symbols.shopping_cart,
-                      fill: 1,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.red)
-                  : Icon(Symbols.shopping_cart,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.grey),
+                  ? customRedIcon(iconName: Symbols.shopping_cart)
+                  : customGreyIcon(iconName: Symbols.shopping_cart),
               label: 'Shop',
             ),
             BottomNavigationBarItem(
               icon: navController.tabIndex.value == 2
-                  ? Icon(Symbols.shopping_bag,
-                      fill: 1,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.red)
-                  : Icon(Symbols.shopping_bag,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.grey),
+                  ? customRedIcon(iconName: Symbols.shopping_bag)
+                  : customGreyIcon(iconName: Symbols.shopping_bag),
               label: 'Bag',
             ),
             BottomNavigationBarItem(
               icon: navController.tabIndex.value == 3
-                  ? Icon(Symbols.favorite,
-                      fill: 1,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.red)
-                  : Icon(Symbols.favorite,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.grey),
+                  ? customRedIcon(iconName: Symbols.favorite)
+                  : customGreyIcon(iconName: Symbols.favorite),
               label: 'Favorites',
             ),
             BottomNavigationBarItem(
               icon: navController.tabIndex.value == 4
-                  ? Icon(Symbols.person_outline,
-                      fill: 1,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.red)
-                  : Icon(Symbols.person_outline,
-                      weight: 100,
-                      grade: 200,
-                      opticalSize: 48,
-                      color: Colors.grey),
+                  ? customRedIcon(iconName: Symbols.person_outline)
+                  : customGreyIcon(iconName: Symbols.person_outline),
               label: 'Profile',
             ),
           ],
@@ -125,5 +80,15 @@ class HomeScreen extends StatelessWidget {
           ),
           child: buildBottomNavigationValue(context, navController)),
     );
+  }
+
+  Widget customGreyIcon({IconData? iconName}) {
+    return Icon(iconName,
+        weight: 100, grade: 200, opticalSize: 48, color: Colors.grey);
+  }
+
+  Widget customRedIcon({IconData? iconName}) {
+    return Icon(iconName,
+        fill: 1, weight: 100, grade: 200, opticalSize: 48, color: Colors.red);
   }
 }

@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 8.h,
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         Get.toNamed(Routes.forgotPassword);
                       },

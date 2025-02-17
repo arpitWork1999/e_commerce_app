@@ -55,9 +55,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 8.h,
-                ),
-                InkWell(
-                  onTap: () {
+                ), GestureDetector(
+                  onTap: (){
                     Get.toNamed(Routes.login);
                   },
                   child: Row(
