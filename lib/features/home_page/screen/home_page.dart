@@ -1,15 +1,17 @@
-import 'package:e_commerce_app/features/home_screen/controller/home_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import '../../forgot_password/screen/forgot_password_screen.dart';
-import '../../login/screen/login_screen.dart';
-import '../../sign_up/screen/sign_up_screen.dart';
+import '../../bag/screen/bag_screen.dart';
+import '../../favorites/screen/favorites_screen.dart';
+import '../../home/screen/home_screen.dart';
+import '../../profile/screen/profile_screen.dart';
+import '../../shop/screen/shop_screen.dart';
+import '../controller/home_page_controller.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomePageScreen extends StatelessWidget {
+  HomePageScreen({super.key});
 
-  final HomeScreenController navController = Get.put(HomeScreenController());
+  final HomePageController navController = Get.put(HomePageController());
 
   final TextStyle unselectedLabelStyle =
       TextStyle(color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 12);
@@ -68,9 +70,11 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => IndexedStack(
             index: navController.tabIndex.value,
             children: [
-              SignUpScreen(),
-              LoginScreen(),
-              ForgotPasswordScreen(),
+              HomeScreen(),
+              ShopScreen(),
+              BagScreen(),
+              FavoritesScreen(),
+              ProfileScreen(),
             ],
           )),
       bottomNavigationBar: Theme(

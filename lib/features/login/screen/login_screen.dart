@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                     CommonButton(
                         text: AppStrings.login,
                         onPressed: () {
-                          Get.toNamed(Routes.homeScreen);
+                          Get.toNamed(Routes.homePage);
                         }),
                     SizedBox(
                       height: 140.h,
