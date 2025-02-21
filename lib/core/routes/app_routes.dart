@@ -1,10 +1,19 @@
+import 'package:e_commerce_app/features/favorites/screen/favorites_screen.dart';
+import 'package:e_commerce_app/features/home/controller/home_screen_controller.dart';
 import 'package:e_commerce_app/features/home_page/screen/home_page.dart';
+import 'package:e_commerce_app/features/otp_screen/controller/otp_screen_controller.dart';
+import 'package:e_commerce_app/features/otp_screen/screen/otp_screen.dart';
+import 'package:e_commerce_app/features/shop/screen/shop_screen.dart';
 import 'package:e_commerce_app/features/sign_up/controller/sign_up_screen_controller.dart';
+import '../../features/bag/controller/bag_screen_controller.dart';
+import '../../features/bag/screen/bag_screen.dart';
+import '../../features/favorites/controller/favorites_screen_controller.dart';
 import '../../features/forgot_password/controller/forgot_password_controller.dart';
 import '../../features/forgot_password/screen/forgot_password_screen.dart';
 import '../../features/home_page/controller/home_page_controller.dart';
 import '../../features/login/controller/login_screen_controlller.dart';
 import '../../features/login/screen/login_screen.dart';
+import '../../features/shop/controller/shop_screen_controller.dart';
 import '../../features/sign_up/screen/sign_up_screen.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +28,7 @@ class Routes {
   static const String bag = "/bag";
   static const String favorites = "/favorites";
   static const String profile = "/profile";
-
+  static const String otpScreen = "/otpScreen";
 
 
   static List<GetPage> appPages() => [
@@ -46,32 +55,37 @@ class Routes {
             name: Routes.homePage,
             page: () => HomePageScreen(),
             binding: BindingsBuilder(() {
-              Get.put<HomePageController>(
-                  HomePageController());
-            })),     GetPage(
-        name: Routes.home,
-        page: () => HomePageScreen(),
-        binding: BindingsBuilder(() {
-          Get.put<HomePageController>(
-              HomePageController());
-        })),     GetPage(
-        name: Routes.shop,
-        page: () => HomePageScreen(),
-        binding: BindingsBuilder(() {
-          Get.put<HomePageController>(
-              HomePageController());
-        })),     GetPage(
-        name: Routes.bag,
-        page: () => HomePageScreen(),
-        binding: BindingsBuilder(() {
-          Get.put<HomePageController>(
-              HomePageController());
-        })),     GetPage(
-        name: Routes.favorites,
-        page: () => HomePageScreen(),
-        binding: BindingsBuilder(() {
-          Get.put<HomePageController>(
-              HomePageController());
-        }))
+              Get.put<HomePageController>(HomePageController());
+            })),
+        GetPage(
+            name: Routes.home,
+            page: () => HomePageScreen(),
+            binding: BindingsBuilder(() {
+              Get.put<HomeScreenConroller>(HomeScreenConroller());
+            })),
+        GetPage(
+            name: Routes.shop,
+            page: () => ShopScreen(),
+            binding: BindingsBuilder(() {
+              Get.put<ShopScreenController>(ShopScreenController());
+            })),
+        GetPage(
+            name: Routes.bag,
+            page: () => BagScreen(),
+            binding: BindingsBuilder(() {
+              Get.put<BagScreenController>(BagScreenController());
+            })),
+        GetPage(
+            name: Routes.favorites,
+            page: () => FavoritesScreen(),
+            binding: BindingsBuilder(() {
+              Get.put<FavoritesScreenController>(FavoritesScreenController());
+            })),
+        GetPage(
+            name: Routes.otpScreen,
+            page: () => OtpScreen(),
+            binding: BindingsBuilder(() {
+              Get.put<OtpScreenController>(OtpScreenController());
+            }))
       ];
 }

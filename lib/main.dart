@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     builder:(context,child) =>GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: Routes.appPages(),
-      initialRoute: Routes.signUp,
+      initialRoute: Routes.otpScreen,
       theme: ThemeData(
         // fontFamily: CommonStrings.satoshi,
       ),
