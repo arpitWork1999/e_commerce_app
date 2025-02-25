@@ -7,6 +7,8 @@ class SignUpScreenController extends GetxController{
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
+  var isLoading = false.obs;
+
   clearTextInput(){
     nameController.clear();
     emailController.clear();

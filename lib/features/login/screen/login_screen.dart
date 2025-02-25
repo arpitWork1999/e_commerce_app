@@ -10,19 +10,20 @@ import '../../../core/routes/app_routes.dart';
 import '../../../core/service/api_service/api_service.dart';
 import '../../../core/text/app_text_widget.dart';
 import '../../../core/utils/image_resources.dart';
+import '../../loader/controller/loader_screen_controller.dart';
 import '../controller/login_screen_controlller.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final formKey = GlobalKey<FormState>();
-
   final LoginScreenController controller = Get.put(LoginScreenController());
-
   final ApiService apiService = ApiService();
+  final LoaderController loaderController = Get.find<LoaderController>();
 
   Future<void> logIn() async {
     if (formKey.currentState!.validate()) {
+      loaderController.showLoader();
       try {
         final response = await apiService
             .logInApi(
@@ -38,6 +39,8 @@ class LoginScreen extends StatelessWidget {
           }
       } catch (e) {
         Fluttertoast.showToast(msg: "An error occurred: $e");
+      }finally {
+        loaderController.hideLoader(); // Stop Loading
       }
     }
   }
@@ -50,6 +53,9 @@ class LoginScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.grey[200],
             surfaceTintColor: Colors.transparent,
+            leading: IconButton(onPressed: () {
+              Get.toNamed(Routes.signUp);
+            }, icon: Icon(Icons.arrow_back_ios)),
           ),
           body: Padding(
             padding: const EdgeInsets.all(12),

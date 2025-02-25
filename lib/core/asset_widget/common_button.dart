@@ -6,13 +6,15 @@ class CommonButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final IconData? icon;
+  //final bool isShowIndicator;
 
   const CommonButton({
     super.key,
     required this.text,
     required this.onPressed,
-    this.icon
-  } );
+    this.icon,
+    //this.isShowIndicator = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +33,22 @@ class CommonButton extends StatelessWidget {
         child: AppTextWidget(
           text: text,
           style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w700),
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
         ),
       ),
     );
   }
 }
-
+// child: isShowIndicator? SizedBox(
+// width: 24,
+// height: 24,
+// child: CircularProgressIndicator(
+// strokeWidth: 2,
+// color: Colors.white,
+// )): AppTextWidget(
+// text: text,
+// style: const TextStyle(
+// color: Colors.white,
+// fontSize: 16,
+// fontWeight: FontWeight.w700),
+// ),

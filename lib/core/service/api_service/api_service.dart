@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:e_commerce_app/core/model/otp_response.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../../../core/model/sign_up_response.dart';
@@ -64,4 +65,28 @@ class ApiService {
     }
   }
 
+  Future<OtpResponse> otpApi({
+    required String otp,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse("https://login-signup-apis.onrender.com/api/verify"),
+        body: {
+          "otp": otp,
+        },
+      );
+      if (response.statusCode == 200) {
+        return OtpResponse.fromJson(jsonDecode(response.body));
+      } else{
+
+        Fluttertoast.showToast(
+          msg: jsonDecode(response.body)["error"]["message"],
+          toastLength: Toast.LENGTH_SHORT,
+        );
+        return OtpResponse();
+      }
+    } catch (e) {
+      throw Exception('An error occurred: $e');
+    }
+  }
 }
