@@ -39,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
         }
       } catch (error) {
         Fluttertoast.showToast(
-            msg: "An error occurred during sign-up. Please try again.${error}");
+            msg: error.toString());
       } finally {
         loaderController.hideLoader(); // Stop Loading
       }
@@ -49,19 +49,17 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: GestureDetector(
-        onTap: FocusManager.instance.primaryFocus?.unfocus,
-        child: Scaffold(
+      child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
           backgroundColor: Colors.grey[200],
-          appBar: AppBar(
-            backgroundColor: Colors.grey[200],
-            surfaceTintColor: Colors.transparent,
-            leading:
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
-          ),
-          body: Stack(
-            children: [
-              Padding(
+          surfaceTintColor: Colors.transparent,
+          leading:
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+        ),
+        body: Stack(
+          children: [
+            Padding(
               padding: const EdgeInsets.all(12),
               child: SingleChildScrollView(
                 child: Form(
@@ -74,13 +72,12 @@ class SignUpScreen extends StatelessWidget {
                         height: 50.h,
                       ),
                       UiTextFieldWidget(
-                        isObscure: false,
                         controller: controller.nameController,
                         keyboardType: TextInputType.name,
                         hintText: AppStrings.name,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please Enter Name";
+                            return AppStrings.enterEmail;
                           }
                           return null;
                         },
@@ -89,7 +86,6 @@ class SignUpScreen extends StatelessWidget {
                         height: 10.h,
                       ),
                       UiTextFieldWidget(
-                        isObscure: false,
                         controller: controller.emailController,
                         keyboardType: TextInputType.emailAddress,
                         hintText: AppStrings.email,
@@ -98,9 +94,9 @@ class SignUpScreen extends StatelessWidget {
                               !RegExp(r"^(?!.*\s)[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+(?!.*\s)")
                                   .hasMatch(value)) {
                             if (value == '') {
-                              return "Please Enter Email";
+                              return AppStrings.enterEmail;
                             } else {
-                              return "Please provide a valid email address";
+                              return AppStrings.provideEmailAddress;
                             }
                           }
                           return null;
@@ -109,24 +105,25 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
-                      UiTextFieldWidget(
-                        isObscure: true,
-                        controller: controller.passController,
-                        keyboardType: TextInputType.text,
-                        hintText: AppStrings.password,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please Enter Password";
-                          }
-                          return null;
-                        },
-                      ),
+                    UiTextFieldWidget(
+                            controller: controller.passController,
+                            keyboardType: TextInputType.text,
+                            isObscure: true,
+                            hintText: AppStrings.password,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return AppStrings.enterPassword;
+                              }
+                              return null;
+                            },
+                          ),
                       SizedBox(
                         height: 8.h,
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.login);
+                          controller.clearTextInput();
+                          Get.offAllNamed(Routes.login);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -144,7 +141,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 30.h,
                       ),
                       CommonButton(
-                        //isShowIndicator: controller.isLoading.value,
+                          //isShowIndicator: controller.isLoading.value,
                           text: AppStrings.signUp,
                           onPressed: () {
                             signUp();
@@ -161,13 +158,11 @@ class SignUpScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          containerCard(
-                              imagePath: ImageResource.appleImage),
+                          containerCard(imagePath: ImageResource.appleImage),
                           SizedBox(
                             width: 20.w,
                           ),
-                          containerCard(
-                              imagePath: ImageResource.googleImage),
+                          containerCard(imagePath: ImageResource.googleImage),
                         ],
                       )
                     ],
@@ -175,8 +170,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
             ),
-            ],
-          ),
+          ],
         ),
       ),
     );

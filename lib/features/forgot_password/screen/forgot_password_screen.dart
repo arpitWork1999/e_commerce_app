@@ -58,9 +58,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                             !RegExp(r"^(?!.*\s)[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+(?!.*\s)")
                                 .hasMatch(value)) {
                           if (value == '') {
-                            return "Please Enter Email";
+                            return AppStrings.enterEmail;
                           } else {
-                            return "Please provide a valid email address";
+                            return AppStrings.provideEmailAddress;
                           }
                         }
                         return null;

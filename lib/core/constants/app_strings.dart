@@ -15,5 +15,11 @@ class AppStrings {
   static const forgotPasswordScreenDescription =
       "Please, enter your email address. You will receive a link to create a new password via email.";
   static const otpScreenDescription = "Please enter the OTP sent on your Email Id.";
+  static const enterEmail =  "Please Enter Email";
+  static const provideEmailAddress =  "Please provide a valid email address";
+  static const enterPassword =  "Please Enter Password";
+  // static const enterEmail =  "Please Enter Email";
+  // static const enterEmail =  "Please Enter Email";
+
 
 }

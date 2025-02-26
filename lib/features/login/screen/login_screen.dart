@@ -25,22 +25,18 @@ class LoginScreen extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       loaderController.showLoader();
       try {
-        final response = await apiService
-            .logInApi(
+        final response = await apiService.logInApi(
             email: controller.emailController.text.trim(),
-                password: controller.passController.text.trim());
-          if (response.statusCode == 200) {
-            controller.clearTextInput();
-            Fluttertoast.showToast(msg: response.data!.message ?? '');
-            Get.toNamed(Routes.otpScreen);
-            // await UserPreferences().saveUser(v);
-            // Navigator.pushReplacement(
-            //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          }
+            password: controller.passController.text.trim());
+        if (response.statusCode == 200) {
+          controller.clearTextInput();
+          Fluttertoast.showToast(msg: response.data!.message ?? '');
+          Get.toNamed(Routes.otpScreen);
+        }
       } catch (e) {
-        Fluttertoast.showToast(msg: "An error occurred: $e");
-      }finally {
-        loaderController.hideLoader(); // Stop Loading
+        Fluttertoast.showToast(msg: e.toString());
+      } finally {
+        loaderController.hideLoader();
       }
     }
   }
@@ -53,9 +49,11 @@ class LoginScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.grey[200],
             surfaceTintColor: Colors.transparent,
-            leading: IconButton(onPressed: () {
-              Get.toNamed(Routes.signUp);
-            }, icon: Icon(Icons.arrow_back_ios)),
+            leading: IconButton(
+                onPressed: () {
+                  Get.toNamed(Routes.signUp);
+                },
+                icon: Icon(Icons.arrow_back_ios)),
           ),
           body: Padding(
             padding: const EdgeInsets.all(12),
@@ -79,9 +77,9 @@ class LoginScreen extends StatelessWidget {
                               !RegExp(r"^(?!.*\s)[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+(?!.*\s)")
                                   .hasMatch(value)) {
                             if (value == '') {
-                              return "Please Enter Email";
+                              return AppStrings.enterEmail;
                             } else {
-                              return "Please provide a valid email address";
+                              return  AppStrings.provideEmailAddress;
                             }
                           }
                           return null;
@@ -91,23 +89,25 @@ class LoginScreen extends StatelessWidget {
                         height: 10.h,
                       ),
                       UiTextFieldWidget(
-                        controller: controller.passController,
-                        isObscure: true,
-                        keyboardType: TextInputType.text,
-                        hintText: AppStrings.password,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please Enter Password";
-                          }
-                          return null;
-                        },
-                      ),
+                            controller: controller.passController,
+                            isObscure: true,
+                            keyboardType: TextInputType.text,
+                            hintText: AppStrings.password,
+
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return AppStrings.enterPassword;
+                              }
+                              return null;
+                            },
+                          ),
                       SizedBox(
                         height: 8.h,
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.forgotPassword);
+                          controller.clearTextInput();
+                          Get.offAllNamed(Routes.forgotPassword);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -127,10 +127,6 @@ class LoginScreen extends StatelessWidget {
                       CommonButton(
                           text: AppStrings.login,
                           onPressed: () {
-                            // if (formKey.currentState!.validate()) {
-                            //   controller.clearTextInput();
-                            //   Get.toNamed(Routes.homePage);
-                            // }
                             logIn();
                           }),
                       SizedBox(
