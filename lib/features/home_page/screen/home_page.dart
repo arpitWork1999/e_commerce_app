@@ -22,7 +22,7 @@ class HomePageScreen extends StatelessWidget {
   buildBottomNavigationValue(context, navController) {
     return Obx(() => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          iconSize: 40,
+          iconSize: 35,
           selectedItemColor: Colors.red,
           unselectedItemColor: Colors.grey,
           unselectedLabelStyle: unselectedLabelStyle,

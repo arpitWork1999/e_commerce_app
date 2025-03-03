@@ -40,68 +40,66 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GestureDetector(
-        onTap: FocusManager.instance.primaryFocus?.unfocus,
-        child: Scaffold(
+    return GestureDetector(
+      onTap: FocusManager.instance.primaryFocus?.unfocus,
+      child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
           backgroundColor: Colors.grey[200],
-          appBar: AppBar(
-            backgroundColor: Colors.grey[200],
-            surfaceTintColor: Colors.transparent,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  AppTextWidget.titleText(AppStrings.otpScreen),
-                  SizedBox(height: 10.h),
-                  AppTextWidget.NormalText(AppStrings.otpScreenDescription),
-                  SizedBox(height: 10.h),
-                  //AppTextWidget.descriptionText(AppStrings.otpScreenDescription),
-                  PinCodeTextField(
-                    length: 6,
-                    appContext: context,
-                    autoFocus: true,
-                    backgroundColor: Colors.transparent,
-                    keyboardType: TextInputType.number,
-                    enableActiveFill: true,
-                    controller: controller.otpController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please Enter OTP";
-                      }
-                      return null;
-                    },
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(8),
-                      fieldHeight: 55.h,
-                      fieldWidth: 45.w,
-                      activeColor: Colors.white,
-                      inactiveColor: Colors.white,
-                      selectedColor: Colors.white,
-                      activeFillColor: Colors.white,
-                      inactiveFillColor: Colors.white,
-                      selectedFillColor: Colors.white,
-                    ),
-                    onChanged: (value) {
-                      print(value);
-                    },
+          surfaceTintColor: Colors.transparent,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                AppTextWidget.titleText(AppStrings.otpScreen),
+                SizedBox(height: 10.h),
+                AppTextWidget.NormalText(AppStrings.otpScreenDescription),
+                SizedBox(height: 10.h),
+                //AppTextWidget.descriptionText(AppStrings.otpScreenDescription),
+                PinCodeTextField(
+                  length: 6,
+                  appContext: context,
+                  autoFocus: true,
+                  backgroundColor: Colors.transparent,
+                  keyboardType: TextInputType.number,
+                  enableActiveFill: true,
+                  controller: controller.otpController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please Enter OTP";
+                    }
+                    return null;
+                  },
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(8),
+                    fieldHeight: 55.h,
+                    fieldWidth: 45.w,
+                    activeColor: Colors.white,
+                    inactiveColor: Colors.white,
+                    selectedColor: Colors.white,
+                    activeFillColor: Colors.white,
+                    inactiveFillColor: Colors.white,
+                    selectedFillColor: Colors.white,
                   ),
-                  SizedBox(height: 30.h),
-                  CommonButton(
-                      text: AppStrings.verify,
-                      onPressed: () {
-                        otpVerify();
-                        // if (formKey.currentState!.validate()) {
-                        //   controller.clearTextInput();
-                        //   Get.toNamed(Routes.login);
-                        // }
-                      }),
-                ],
-              ),
+                  onChanged: (value) {
+                    print(value);
+                  },
+                ),
+                SizedBox(height: 30.h),
+                CommonButton(
+                    text: AppStrings.verify,
+                    onPressed: () {
+                      otpVerify();
+                      // if (formKey.currentState!.validate()) {
+                      //   controller.clearTextInput();
+                      //   Get.toNamed(Routes.login);
+                      // }
+                    }),
+              ],
             ),
           ),
         ),

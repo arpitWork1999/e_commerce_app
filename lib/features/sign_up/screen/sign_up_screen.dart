@@ -48,130 +48,134 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          backgroundColor: Colors.grey[200],
-          surfaceTintColor: Colors.transparent,
-          leading:
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
-        ),
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppTextWidget.titleText(AppStrings.signUp),
-                      SizedBox(
-                        height: 50.h,
-                      ),
-                      UiTextFieldWidget(
-                        controller: controller.nameController,
-                        keyboardType: TextInputType.name,
-                        hintText: AppStrings.name,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.enterEmail;
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      UiTextFieldWidget(
-                        controller: controller.emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        hintText: AppStrings.email,
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp(r"^(?!.*\s)[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+(?!.*\s)")
-                                  .hasMatch(value)) {
-                            if (value == '') {
-                              return AppStrings.enterEmail;
-                            } else {
-                              return AppStrings.provideEmailAddress;
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      // appBar: AppBar(
+      //   backgroundColor: Colors.grey[200],
+      //   surfaceTintColor: Colors.transparent,
+      //   leading:
+      //       IconButton(
+      //           onPressed: () {
+      //             Get.back();
+      //       }, icon: Icon(Icons.arrow_back_ios)),
+      // ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 70.h,
+                    ),
+                    AppTextWidget.titleText(AppStrings.signUp),
+                    SizedBox(
+                      height: 50.h,
+                    ),
                     UiTextFieldWidget(
-                            controller: controller.passController,
-                            keyboardType: TextInputType.text,
-                            isObscure: true,
-                            hintText: AppStrings.password,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return AppStrings.enterPassword;
-                              }
-                              return null;
-                            },
-                          ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          controller.clearTextInput();
-                          Get.offAllNamed(Routes.login);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            AppTextWidget.NormalText(
-                                AppStrings.alreadyHaveAnAccount),
-                            Icon(
-                              Icons.arrow_right_alt,
-                              color: Colors.red,
-                            ),
-                          ],
+                      controller: controller.nameController,
+                      keyboardType: TextInputType.name,
+                      hintText: AppStrings.name,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppStrings.enterEmail;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    UiTextFieldWidget(
+                      controller: controller.emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      hintText: AppStrings.email,
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r"^(?!.*\s)[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+(?!.*\s)")
+                                .hasMatch(value)) {
+                          if (value == '') {
+                            return AppStrings.enterEmail;
+                          } else {
+                            return AppStrings.provideEmailAddress;
+                          }
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                  UiTextFieldWidget(
+                          controller: controller.passController,
+                          keyboardType: TextInputType.text,
+                          isObscure: true,
+                          hintText: AppStrings.password,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.enterPassword;
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      CommonButton(
-                          //isShowIndicator: controller.isLoading.value,
-                          text: AppStrings.signUp,
-                          onPressed: () {
-                            signUp();
-                          }),
-                      SizedBox(
-                        height: 80.h,
-                      ),
-                      Center(
-                          child: AppTextWidget.NormalText(
-                              AppStrings.signUpOptions)),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.clearTextInput();
+                        Get.offAllNamed(Routes.login);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          containerCard(imagePath: ImageResource.appleImage),
-                          SizedBox(
-                            width: 20.w,
+                          AppTextWidget.NormalText(
+                              AppStrings.alreadyHaveAnAccount),
+                          Icon(
+                            Icons.arrow_right_alt,
+                            color: Colors.red,
                           ),
-                          containerCard(imagePath: ImageResource.googleImage),
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    CommonButton(
+                        //isShowIndicator: controller.isLoading.value,
+                        text: AppStrings.signUp,
+                        onPressed: () {
+                          signUp();
+                        }),
+                    SizedBox(
+                      height: 95.h,
+                    ),
+                    Center(
+                        child: AppTextWidget.NormalText(
+                            AppStrings.signUpOptions)),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        containerCard(imagePath: ImageResource.appleImage),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        containerCard(imagePath: ImageResource.googleImage),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

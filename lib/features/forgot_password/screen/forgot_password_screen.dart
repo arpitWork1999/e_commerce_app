@@ -21,20 +21,20 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
           backgroundColor: Colors.grey[200],
-          appBar: AppBar(
-            backgroundColor: Colors.grey[200],
-            surfaceTintColor: Colors.transparent,
-            leading: IconButton(
-                onPressed: () {
-                  Get.toNamed(Routes.login);
-                },
-                icon: Icon(Icons.arrow_back_ios)),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(12),
+          surfaceTintColor: Colors.transparent,
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(15),
+          child: SingleChildScrollView(
             child: Form(
               key: formKey,
               child: Column(
@@ -79,7 +79,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         }),
                   ]),
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

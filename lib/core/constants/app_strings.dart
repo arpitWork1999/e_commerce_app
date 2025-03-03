@@ -1,6 +1,7 @@
 class AppStrings {
   static const signUp = "Sign Up";
   static const login = "Login";
+  static const dontHaveAnAccount = "Don't have an account?";
   static const forgotPassword = "Forgot password";
   static const name = "Name";
   static const email = "Email";
