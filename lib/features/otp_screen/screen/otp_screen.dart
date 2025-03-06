@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../core/asset_widget/common_button.dart';
 import '../../../core/constants/app_strings.dart';
@@ -19,11 +20,15 @@ class OtpScreen extends StatelessWidget {
 
   final ApiService apiService = ApiService();
 
+  final String arguementedEmail = Get.arguments;
+
   Future<void> otpVerify() async {
     if (formKey.currentState!.validate()) {
       try {
-        final response =
-            await apiService.otpApi(otp: controller.otpController.text.toString());
+        final response = await apiService.otpApi(
+            //email: "",
+            email: arguementedEmail,
+            otp: controller.otpController.text.toString());
         if (response.statusCode == 200) {
           controller.clearTextInput();
           Fluttertoast.showToast(msg: response.data!.message ?? '');
@@ -36,6 +41,22 @@ class OtpScreen extends StatelessWidget {
         Fluttertoast.showToast(msg: "An error occurred: $e");
       }
     }
+  }
+
+  Future<void> resendOtp() async {
+      try {
+        final response = await apiService.resendOtpApi();
+        if (response.statusCode == 200) {
+          Fluttertoast.showToast(msg: response.data!.message ?? '');
+          Get.toNamed(Routes.homePage);
+          // await UserPreferences().saveUser(v);
+          // Navigator.pushReplacement(
+          //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        }
+      } catch (e) {
+        Fluttertoast.showToast(msg: "An error occurred: $e");
+      }
+
   }
 
   @override
@@ -99,6 +120,27 @@ class OtpScreen extends StatelessWidget {
                       //   Get.toNamed(Routes.login);
                       // }
                     }),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AppTextWidget.NormalText(AppStrings.didNotReceiveOtp),
+                    IconButton(
+                        onPressed: () {
+                          resendOtp();
+                        },
+                        padding: EdgeInsets.only(left: 3.w),
+                        icon: Text(AppStrings.resend,
+                            style: GoogleFonts.plusJakartaSans(
+                              textStyle: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.blue),
+                            ))),
+                  ],
+                ),
               ],
             ),
           ),

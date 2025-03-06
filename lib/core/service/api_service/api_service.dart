@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:e_commerce_app/core/model/otp_response.dart';
+import 'package:e_commerce_app/core/model/resend_otp_response.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../../../core/model/sign_up_response.dart';
@@ -8,7 +9,8 @@ import '../../model/login_response.dart';
 class ApiService {
 
   Future<SuccessResponse> signUpApi({
-    required String userName,
+    required String firstName,
+    required String lastName,
     required String? email,
     required String password,
   }) async {
@@ -16,7 +18,8 @@ class ApiService {
       final response = await http.post(
         Uri.parse("https://login-signup-apis.onrender.com/api/signup"),
         body: {
-          "name": userName.toString(),
+          "firstName": firstName.toString(),
+          "lastName": lastName.toString(),
           "email": email,
           "password": password
         },
@@ -67,11 +70,13 @@ class ApiService {
 
   Future<OtpResponse> otpApi({
     required String otp,
+    required String email
   }) async {
     try {
       final response = await http.post(
         Uri.parse("https://login-signup-apis.onrender.com/api/verify"),
         body: {
+          "email": email,
           "otp": otp,
         },
       );
@@ -84,6 +89,30 @@ class ApiService {
           toastLength: Toast.LENGTH_SHORT,
         );
         return OtpResponse();
+      }
+    } catch (e) {
+      throw Exception('An error occurred: $e');
+    }
+  }
+
+  Future<ResendOtpResponse> resendOtpApi() async {
+    try {
+      final response = await http.post(
+        Uri.parse("https://login-signup-apis.onrender.com/api/resendOtp"),
+        // body: {
+        //   "email": email,
+        //   "otp": otp,
+        // },
+      );
+      if (response.statusCode == 200) {
+        return ResendOtpResponse.fromJson(jsonDecode(response.body));
+      } else{
+
+        Fluttertoast.showToast(
+          msg: jsonDecode(response.body)["error"]["message"],
+          toastLength: Toast.LENGTH_SHORT,
+        );
+        return ResendOtpResponse();
       }
     } catch (e) {
       throw Exception('An error occurred: $e');

@@ -3,11 +3,14 @@ class AppStrings {
   static const login = "Login";
   static const dontHaveAnAccount = "Don't have an account?";
   static const forgotPassword = "Forgot password";
-  static const name = "Name";
+  static const firstName = "First Name";
+  static const lastName = "Last Name";
   static const email = "Email";
   static const password = "Password";
   static const send = "Send";
+  static const resend = "Resend";
   static const otpScreen = "OTP Verification";
+  static const didNotReceiveOtp = "Did not receive OTP?";
   static const verify = "Verify";
   static const alreadyHaveAnAccount = "Already have an account";
   static const forgotYourPassword = "Forgot your password";

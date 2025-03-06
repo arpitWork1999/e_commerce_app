@@ -28,14 +28,18 @@ class SignUpScreen extends StatelessWidget {
       loaderController.showLoader();
       try {
         final response = await apiService.signUpApi(
-          userName: controller.nameController.text.trim(),
+          firstName: controller.firstNameController.text.trim(),
+          lastName: controller.lastNameController.text.trim(),
           email: controller.emailController.text.trim(),
           password: controller.passController.text.trim(),
         );
         if (response.statusCode == 201) {
-          controller.clearTextInput();
+          //controller.clearTextInput();
           Fluttertoast.showToast(msg: response.data!.message ?? '');
-          Get.toNamed(Routes.login);
+          Get.toNamed(Routes.otpScreen,
+              arguments: controller.emailController.text.trim()
+          );
+
         }
       } catch (error) {
         Fluttertoast.showToast(
@@ -77,9 +81,23 @@ class SignUpScreen extends StatelessWidget {
                       height: 50.h,
                     ),
                     UiTextFieldWidget(
-                      controller: controller.nameController,
+                      controller: controller.firstNameController,
                       keyboardType: TextInputType.name,
-                      hintText: AppStrings.name,
+                      hintText: AppStrings.firstName,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppStrings.enterEmail;
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    UiTextFieldWidget(
+                      controller: controller.lastNameController,
+                      keyboardType: TextInputType.name,
+                      hintText: AppStrings.lastName,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppStrings.enterEmail;
@@ -152,7 +170,7 @@ class SignUpScreen extends StatelessWidget {
                           signUp();
                         }),
                     SizedBox(
-                      height: 95.h,
+                      height: 70.h,
                     ),
                     Center(
                         child: AppTextWidget.NormalText(

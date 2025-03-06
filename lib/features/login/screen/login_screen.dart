@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
         if (response.statusCode == 200) {
           controller.clearTextInput();
           Fluttertoast.showToast(msg: response.data!.message ?? '');
-          Get.toNamed(Routes.otpScreen);
+          Get.toNamed(Routes.homePage);
         }
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
@@ -154,7 +154,7 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 100.h,
+                      height: 130.h,
                     ),
                     Center(
                         child: AppTextWidget.NormalText(
